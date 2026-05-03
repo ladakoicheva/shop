@@ -1,0 +1,26 @@
+
+
+
+
+.productForm {
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  width: clamp(280px, 90vw, 500px);
+
+  z-index: -1;
+  padding: 30px;
+ 
+  border-radius: 8px;
+
+}

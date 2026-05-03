@@ -1,0 +1,18 @@
+.productCard{
+  margin: 0 auto;
+ aspect-ratio: 1/1;
+  width: 50%;
+  border-radius: 30px;
+  background: -webkit-linear-gradient(90deg, #ffffff, #d0e3ff, #eaeaee, #faf2e5);
+  background: linear-gradient(90deg, #ffffff, #d0e3ff, #eaeaee, #faf2e5);
+  transition: .3s all;
+}
+.productCard img{
+  width:50%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.productCard:hover {
+  transform: translateY(-10%);
+}

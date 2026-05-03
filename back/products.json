@@ -1,0 +1,52 @@
+[
+  {
+    "img": "",
+    "id": 1,
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 59.99,
+    "currency": "USD",
+    "inStock": true,
+    "rating": 4.5
+  },
+  {
+    "img": "",
+    "id": 2,
+    "name": "Men's T-Shirt",
+    "category": "Clothing",
+    "price": 19.99,
+    "currency": "USD",
+    "inStock": true,
+    "rating": 4.2
+  },
+  {
+    "img": "",
+    "id": 3,
+    "name": "Coffee Maker",
+    "category": "Home Appliances",
+    "price": 89.99,
+    "currency": "USD",
+    "inStock": false,
+    "rating": 4.7
+  },
+  {
+    "img": "",
+    "id": 4,
+    "name": "Running Shoes",
+    "category": "Footwear",
+    "price": 74.99,
+    "currency": "USD",
+    "inStock": true,
+    "rating": 4.6
+  },
+  {
+    "img": "",
+    "id": 5,
+    "name": "Smartphone",
+    "category": "Electronics",
+    "price": 499.99,
+    "currency": "USD",
+    "inStock": true,
+    "rating": 4.8
+  }
+]

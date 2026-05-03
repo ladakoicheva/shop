@@ -1,0 +1,17 @@
+.header {
+  width: 100%;
+  position: sticky;
+
+  margin-bottom: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+
+
+}
+
+a {
+  margin-left: 20px;
+}

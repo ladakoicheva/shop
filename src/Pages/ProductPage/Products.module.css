@@ -1,0 +1,15 @@
+.grid_template_columns{
+    width: 100vw;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-gap: 15px;
+    box-sizing: border-box;
+  
+ 
+}
+
+input{
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
