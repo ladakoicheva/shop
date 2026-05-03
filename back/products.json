@@ -1,6 +1,6 @@
 [
   {
-    "img": "",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_6037f8a0-df3b-427f-806e-160d5a0ddb4f?wid=300&hei=300&fmt=pjpeg",
     "id": 1,
     "name": "Wireless Headphones",
     "category": "Electronics",
@@ -10,7 +10,7 @@
     "rating": 4.5
   },
   {
-    "img": "",
+    "img": "https://cdn10.bigcommerce.com/s-e6hs92zf/products/764/images/5621/Solid-Mens-Forest__52921.1735586043.1280.1280.jpg?c=2",
     "id": 2,
     "name": "Men's T-Shirt",
     "category": "Clothing",
@@ -20,7 +20,7 @@
     "rating": 4.2
   },
   {
-    "img": "",
+    "img": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1721863797-cuisinart-coffee-center-barista-bar-4-in-1-coffeemaker-wit-o.jpg?crop=1xw:1xh;center,top&resize=980:*",
     "id": 3,
     "name": "Coffee Maker",
     "category": "Home Appliances",
@@ -30,7 +30,7 @@
     "rating": 4.7
   },
   {
-    "img": "",
+    "img": "https://images.ctfassets.net/hnk2vsx53n6l/30E7WIB5QHGx3vv6y2sky4/77f5f135aba4368ac984681ad7a4ca8b/024626de43f411c6f7957208738b9dc4e98df4db.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80",
     "id": 4,
     "name": "Running Shoes",
     "category": "Footwear",
@@ -40,7 +40,7 @@
     "rating": 4.6
   },
   {
-    "img": "",
+    "img": "https://image.made-in-china.com/202f0j00OHReJTCKrZot/6-56-Inches-Cell-Phone-Android-12-Mobile-Phone-Uniwa-X19s-4G-Android-Global-Version-Smartphone.webp",
     "id": 5,
     "name": "Smartphone",
     "category": "Electronics",

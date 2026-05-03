@@ -1,17 +1,25 @@
 .productCard{
   margin: 0 auto;
- aspect-ratio: 1/1;
-  width: 50%;
-  border-radius: 30px;
-  background: -webkit-linear-gradient(90deg, #ffffff, #d0e3ff, #eaeaee, #faf2e5);
-  background: linear-gradient(90deg, #ffffff, #d0e3ff, #eaeaee, #faf2e5);
+  height: 100%;
+  width: 100%;
+  background: white;
   transition: .3s all;
+  border: 1px solid  grey;
 }
+
 .productCard img{
-  width:50%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  width:100%;
+  object-fit:cover;
+  border:1px solid grey
 }
+
+.info{
+text-align: left;
+}
+.info div{
+  margin-bottom: 5px;
+}
+
 
 .productCard:hover {
   transform: translateY(-10%);

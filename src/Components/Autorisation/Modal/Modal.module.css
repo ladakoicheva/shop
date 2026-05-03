@@ -1,7 +1,7 @@
 .modal {
 
-  background-color: rgb(176, 203, 173);
-  width: clamp(300px, 20%, 600px);
+  background-color: rgb(252, 242, 242);
+  width: clamp(300px, 30%, 600px);
   aspect-ratio: 1/1;
   border-radius: 10px;
   position: fixed;
@@ -9,20 +9,38 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  border: 2px solid #e5e4e7;;
 }
+
 .modal form {
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
- 
+
 }
 
-.closeBtn {
-  position: absolute;
-  top: 5%;
-  left: 90%;
+.modalHeader {
+
+  display: flex;
+  justify-content: space-between;
+  padding: 2%
+}
+
+.modal h1,
+h2,
+h3,
+label,
+p,
+span {
+  color: rgb(40, 40, 40)
+}
+
+.modal span {
+  text-decoration: underline;
   cursor: pointer;
+
+
 }

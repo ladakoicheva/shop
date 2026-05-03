@@ -4,23 +4,34 @@
 
 .productForm {
 
+  background-color:rgb(252, 242, 242) ;
+  border:1px solid grey;
   display: flex;
   flex-direction: column;
   gap: 15px;
 
   align-items: center;
-
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-
   width: clamp(280px, 90vw, 500px);
-
   z-index: -1;
   padding: 30px;
- 
   border-radius: 8px;
+ 
 
 }
+
+
+
+.productForm select, .productForm input{
+  background: transparent;
+  padding:5px;
+  width:100%;
+  
+}
+input::placeholder{
+  color: rgb(40,40,40)
+}
+

@@ -1,17 +1,6 @@
-label {
-  color: white;
-}
-
-input {
-  padding: 5px;
-  border-radius: 5px;
-  background: transparent;
-  border: 3px solid white;
-  width: 50%;
- 
-}
-
 .userForm{
+  padding-left: 5%;
+  padding-right: 5%;
   width: 100%;
   height: 100%;
 }
@@ -20,7 +9,25 @@ input {
 
 
 
-span {
-  text-decoration: underline;
-  cursor: pointer;
+.userForm p{
+  margin-bottom: 10px;
 }
+
+
+
+.userForm input {
+  padding: 2%;
+  border-radius: 5px;
+  background: transparent;
+  width: 100%;
+  color:rgb(40,40,40)
+}
+
+
+
+.userForm input::placeholder{
+  font-size: 1em;
+  color: rgb(40, 40, 40)
+}
+
+

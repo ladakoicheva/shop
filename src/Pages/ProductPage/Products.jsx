@@ -1,34 +1,10 @@
 import { useEffect, useMemo, useState } from "react"
-import { getAllProduct } from "../../../back/apiProducts";
+import { minSort,maxSort } from "../../utils/sort";
 import ProductCard from "../../Components/ProductCard/ProductCard"
 import styles from './Products.module.css'
 import FilterProducts from "../../Components/FilterProducts/FilterProducts";
 import { useStoreContext } from "../../store/store";
 
-
-const minSort = (a, b) => {
-
-  if (a.price > b.price) {
-    return 1;
-  }
-  if (a.price < b.price) {
-    return -1;
-  }
-
-  return 0;
-}
-
-const maxSort = (a, b) => {
-
-  if (a.price > b.price) {
-    return -1;
-  }
-  if (a.price < b.price) {
-    return 1;
-  }
-
-  return 0;
-}
 
 
 

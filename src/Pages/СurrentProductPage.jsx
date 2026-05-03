@@ -27,7 +27,7 @@ export default function СurrentProductPage() {
     }
     getCurrentProduct(id)
     console.log(currentProduct)
-  },[id,currentProduct])
+  },[])
 
   return (
     <div>{currentProduct && <div>{currentProduct.id }</div>}</div>

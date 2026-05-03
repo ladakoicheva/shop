@@ -37,7 +37,7 @@ export const useStore = () => {
   const addNewProduct = async (product) => {
     const response = await createProduct(product);
     if (response.ok) {
-      setProducts([...products, response.data])
+      setProducts([ ...products,response.data])
 
     }
     return response.ok

@@ -19,7 +19,7 @@
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
-  background: var(--bg);
+  background: rgb(245, 245, 245);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -49,10 +49,6 @@
 
 }
 
-body {
-  margin: 0;
-}
-
 #root {
   width: 100vw;
   margin: 0 auto;
@@ -63,17 +59,28 @@ body {
 
 }
 
+a:hover{
+  color:red !important
+}
 
-
-*{
-  
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /*outline: 1px solid red ;*/
+  color: rgb(40,40,40);
+  /*outline: 1px solid red;*/
 }
 
-button{
+button {
   padding: 5px;
+  cursor: pointer;
+  color:#e5e4e7;
 }
+
+a,
+a:visited {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 

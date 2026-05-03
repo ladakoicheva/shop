@@ -14,16 +14,11 @@ export default function ProductCard({ product }) {
       </Link>
 
       <section className={style.info}>
-        <div>price:{product.currency == 'UAH' ? getUANtoUSD(product.price) : product.price}USD</div>
+        <div><h2>{product.currency == 'UAH' ? getUANtoUSD(product.price) : product.price} USD</h2></div>
+        <div style={{ color: `${product.inStock ? 'green':'red'}`}}>{product.inStock ? '◉ in Stock' : '◉ out of Stock' }</div>
         <div>category:{product.category}</div>
 
       </section>
-
-
-
-
-
-
 
     </article>
   )

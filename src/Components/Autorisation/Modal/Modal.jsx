@@ -11,7 +11,8 @@ export default function Modal() {
   return (
 
     <div className={styles.modal}>
-      <span onClick={() => setModalOpen(false)} className={styles.closeBtn}>✕</span>
+      <div className={styles.modalHeader}><h3>{authMode.text}</h3>  <span onClick={() => setModalOpen(false)} className={styles.closeBtn}>✕</span> </div>
+      <hr />
       {authMode.type === TYPE_MODAL.SING_UP.type
         ? <SignUpForm />
         : <SignInForm />}
