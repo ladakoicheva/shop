@@ -2,7 +2,6 @@ import products from './products.json'
 
 const getLS = () => {
   const d = localStorage.getItem('products');
-  console.log(products)
   if (d) {
     return JSON.parse(d)
   }
