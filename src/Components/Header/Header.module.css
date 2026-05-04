@@ -4,23 +4,24 @@
   top: 0;
   left: 0;
   z-index: 99;
-  
-  background-color:rgb(40, 40, 40);
+
+  background-color: rgb(40, 40, 40);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 30px;
-
+  flex-wrap: wrap;
+  
 
 
 }
 
 .header a {
   margin-left: 20px;
-    color:#e5e4e7;
+  color: #e5e4e7;
 }
 
 .header h4 {
-  margin-left: 20px;
+
   color: #e5e4e7;
 }
