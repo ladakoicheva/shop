@@ -42,7 +42,7 @@ export default function ProductsForm() {
 
     if (isResponse) {
       formik.resetForm();
-      navigate('products')
+      navigate('/')
 
     }
    

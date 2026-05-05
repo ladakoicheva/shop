@@ -10,28 +10,9 @@ export const Autorisation = () => {
   /*const [modalOpen, setModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState(TYPE_MODAL.SING_UP);*/
 
-  const { user, setUser, modalOpen, setModalOpen, authMode } = useStoreContext()
-
-  useEffect(() => {
-    authorize(localStorage.getItem('token'))
-
-  }, [])
-
-  const logOut = () => {
-    localStorage.removeItem('token');
-    setUser(null);
-  }
-
-
-  const authorize = async (token) => {
-    const user = await autorisation(token);
-    if (user.ok) setUser(user);
-  }
-
-
-
-
-
+  const { user, setUser, modalOpen, setModalOpen, authMode, logOut } = useStoreContext()
+  
+  
   return (
 
     <div>

@@ -40,7 +40,7 @@ export const getOneProduct = async (id) => {
 }
 export const getAllProduct = async () => {
   const products = getLS()
-
+  saveLS(products)
   return { ok: true, data: products }
 }
 

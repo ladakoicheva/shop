@@ -25,3 +25,8 @@ text-align: left;
 .productCard:hover {
   transform: translateY(-10%);
 }
+
+
+.basketBtns button{
+  margin-left:5px
+}
