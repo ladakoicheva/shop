@@ -61,10 +61,12 @@ export const useStore = () => {
   }
 
   const addToBasket = (product) => {
+  
     const copy = { ...basket }
     const id = product.id
     if (copy[id]) {
       copy[id].count++;
+      console.log(copy[id].product.count)
     } else {
       copy[id] = { product: product, count: 1 }
     }
@@ -75,7 +77,7 @@ export const useStore = () => {
   const deleteFromBasket = (product) => {
     const copy = { ...basket }
     const id = product.id
-    copy[id].count--
+    copy[id].count --
     if (copy[id].count === 0) delete copy[id];
 
     setBasket(copy)
@@ -89,7 +91,7 @@ export const useStore = () => {
       }
     }
     getProducts();
-    authorize()
+    //authorize()
   }, [])
 
   useEffect(() => {

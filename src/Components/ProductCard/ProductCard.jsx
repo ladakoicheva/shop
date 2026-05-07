@@ -16,7 +16,8 @@ export default function ProductCard({ product }) {
   //    const isInBasket = basket.hasOwnProperty(product.name)
   //     return isInBasket
   //  }, [basket])
-  const isInBasket = basket[product.name]
+  const isInBasket = basket[product.id]
+  
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function ProductCard({ product }) {
             <h2>{product.currency == 'UAH' ? getUANtoUSD(product.price) : product.price} USD</h2>
             <div className={style.basketBtns}>
               <button onClick={() => addToBasket(product)} >+</button>
-              {basket[product.name]?.count}
+              {basket[product.id]?.count}
               {isInBasket && <button onClick={() => deleteFromBasket(product)}>-</button>}
             </div>
 
