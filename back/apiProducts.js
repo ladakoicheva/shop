@@ -5,6 +5,7 @@ const getLS = () => {
   if (d) {
     return JSON.parse(d)
   }
+  if(!d)saveLS(products)
   return products
 }
 const saveLS = (data) => localStorage.setItem('products', JSON.stringify(data));
@@ -26,9 +27,8 @@ export const removeProduct = async (id) => {
 }
 export const editProduct = async (product) => {
   const products = getLS();
-  const index = products.findIndex((el) => el.id === product.id)
-
-  products[index] = product;
+  const index = products.findIndex((el) => el.id == product.id)
+  products[index] = product
   saveLS(products)
   return { ok: true, data: product }
 }
@@ -40,7 +40,6 @@ export const getOneProduct = async (id) => {
 }
 export const getAllProduct = async () => {
   const products = getLS()
-  saveLS(products)
   return { ok: true, data: products }
 }
 

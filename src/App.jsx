@@ -6,6 +6,8 @@ import СurrentProductPage from './Pages/СurrentProductPage.jsx'
 import Header from './Components/Header/Header';
 import { StoreContext, useStore } from './store/store';
 import BasketPage from './Pages/BasketPage/BasketPage.jsx';
+import Loading from './Components/Loading/Loading.jsx'
+import ProductsForm from './Components/Forms/ProductsForm/ProductsForm.jsx';
 
 function App() {
   // Сделать голосовые сообщение, распознавание голоса и голосовой ввод.
@@ -14,6 +16,9 @@ function App() {
     <BrowserRouter >
       <StoreContext.Provider value={store} >
         <Header />
+        {store.loading && <Loading />}
+         {store.editCurrentProduct && <ProductsForm  />}
+
         <Routes>
           {store.isAdmin && <Route path='/add' element={<AddProducts />} />}
 

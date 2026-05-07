@@ -4,48 +4,54 @@ import IOSSwitch from '../../Switch';
 import { schema } from '../schemas/productsValidationSchema';
 import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../../../store/store';
+import { useEffect } from 'react';
 
 
 
 
 export default function ProductsForm() {
+
+ 
   const store = useStoreContext();
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      category: '',
-      price: '',
-      currency: 'UAH',
-      inStock: false,
-      rating: 1,
-      img: ""
+      name: store.editCurrentProduct ? store.productToEdit.name:'',
+      category: store.editCurrentProduct ? store.productToEdit.category : '',
+      price: store.editCurrentProduct ? store.productToEdit.price : '',
+      currency: store.editCurrentProduct ? store.productToEdit.currency : 'UAH',
+      inStock: store.editCurrentProduct ? store.productToEdit.inStock : false,
+      rating: store.editCurrentProduct ? store.productToEdit.rating : 1,
+      img: store.editCurrentProduct ? store.productToEdit.img : ""
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      create(values)
+      store.editCurrentProduct ? store.editProductData({ ...values, id: store.productToEdit.id }):create(values)
     },
 
 
   });
   const create = async (product) => {
-
-    const isInProducts = store.products.some((el) => el.name === product.name );
+    store.openLoading()
+    const isInProducts = store.products.some((el) => el.name === product.name);
     if (isInProducts) {
       //сделать увед пользователю
       console.log('product exists');
+      store.closeLoading()
       return
     }
-    
+
     const isResponse = await store.addNewProduct(product)
 
     if (isResponse) {
+      setTimeout(store.closeLoading, 3000)
+
       formik.resetForm();
       navigate('/')
 
     }
-   
+
 
   }
 
@@ -67,7 +73,8 @@ export default function ProductsForm() {
     <>
 
       <form className={styles.productForm} onSubmit={formik.handleSubmit}>
-        <h1>Add Product </h1>
+        {store.editCurrentProduct && <span onClick={()=>store.setEditCurrentProduct(false) } className={styles.close}>×</span>}
+        <h1>{store.editCurrentProduct?'Edit Product' :'Add Product'} </h1>
         <hr style={{ width: '100%' }} />
         <input onChange={handleFileChange} type="file" id='img' />
         <label htmlFor="name">Product name</label>
@@ -107,7 +114,7 @@ export default function ProductsForm() {
           <div>{formik.errors.rating}</div>
         ) : null}
 
-        <button  type='submit'> Save</button>
+        <button type='submit'> Save</button>
 
       </form>
     </>

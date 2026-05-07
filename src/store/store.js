@@ -4,6 +4,9 @@ import { createProduct } from "../../back/apiProducts";
 import { logIn, registration } from "../../back/api";
 import { TYPE_MODAL } from "../Components/Forms/typeModeHelper";
 import { autorisation } from '../../back/api'
+import { removeProduct } from "../../back/apiProducts";
+import { editProduct } from "../../back/apiProducts";
+
 
 export const StoreContext = createContext({
   products: [],
@@ -25,13 +28,28 @@ export const useStore = () => {
   const [user, setUser] = useState(null)
   const [modalOpen, setModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState(TYPE_MODAL.SING_UP);
-  const [basket, setBasket] = useState(JSON.parse(localStorage.getItem('basket'))||{}); // {} 
+  const [basket, setBasket] = useState(JSON.parse(localStorage.getItem('basket')) || {}); // {} 
+  const [loading, setLoading] = useState(false);
+  const [editCurrentProduct, setEditCurrentProduct] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null)
+  const isAdmin = user?.data.type === 'admin' ? true : false;
 
 
 
+  const editProductData = async (product) => {
+    const res = await editProduct(product);
+    console.log(res)
+    if (res.ok) {
+      const copy = [...products]
+      const index = copy.findIndex((el) => el.id == res.data.id);
+      copy[index] = res.data;
+      console.log(res.data.id)
 
-  const isAdmin = user?.data.type === 'admin' ? true : false
+      setProducts(copy)
+      setEditCurrentProduct(false)
+    }
 
+  }
   const authorize = async (token) => {
     const user = await autorisation(token);
     if (user.ok) setUser(user);
@@ -39,10 +57,10 @@ export const useStore = () => {
 
   const addToBasket = (product) => {
     const copy = { ...basket }
-    if (copy[product.name])  {
+    if (copy[product.name]) {
       copy[product.name].count++;
     } else {
-      copy[product.name] ={product:product,count:1}
+      copy[product.name] = { product: product, count: 1 }
     }
     //! error sheme
     setBasket(copy)
@@ -50,9 +68,9 @@ export const useStore = () => {
 
   const deleteFromBasket = (product) => {
     const copy = { ...basket }
-    copy[product.name].count --
-    if(copy[product.name].count === 0) delete copy[product.name];
-    
+    copy[product.name].count--
+    if (copy[product.name].count === 0) delete copy[product.name];
+
     setBasket(copy)
   }
 
@@ -80,6 +98,14 @@ export const useStore = () => {
     return response.ok
   }
 
+  const deleteProduct = async (id) => {
+    const res = await removeProduct(id);
+    if (res.ok) {
+      const filtered = products.filter((el) => el.id !== id);
+      setProducts(filtered);
+    }
+
+  }
 
   const onLogin = async (email, password) => {
     const userData = await logIn(email, password);
@@ -108,6 +134,12 @@ export const useStore = () => {
     return { ok: userData.ok, text: userData?.text || '' }
   }
 
+  const openLoading = () => {
+    setLoading(true);
+  }
+  const closeLoading = () => {
+    setLoading(false);
+  }
 
   return {
     user,
@@ -125,7 +157,15 @@ export const useStore = () => {
     addToBasket,
     deleteFromBasket,
     basket,
-
+    deleteProduct,
+    loading,
+    openLoading,
+    closeLoading,
+    editCurrentProduct,
+    setEditCurrentProduct,
+    editProductData,
+    productToEdit,
+    setProductToEdit
   }
 }
 

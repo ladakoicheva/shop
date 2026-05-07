@@ -50,8 +50,8 @@ export default function Products() {
 
 
   return (
-    <>
-
+    
+ <div>
       {/*<h3>Select category</h3>
       <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} name="category" >
         <option value="All" >All</option>
@@ -64,6 +64,7 @@ export default function Products() {
         <option value="max">Max price</option>
       </select>
       <input onChange={change} value={searchValue }type="text" placeholder="search by name..." />*/}
+     
       <FilterProducts options={options} filterProducts={filterProducts} />
       <ul className={styles.grid_template_columns}>
         {showProducts && showProducts.map((el) =>
@@ -72,9 +73,11 @@ export default function Products() {
           </li>
         )}
       </ul>
-    </>
+      
+   </div >
 
   )
+  
 }
 
 

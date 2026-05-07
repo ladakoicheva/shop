@@ -55,8 +55,9 @@
   },
   {
     "id": 10,
-    "email": "user10@example.com",
-    "password": "P@ssw0rd10",
-    "token": "9c0d1e2f3g4h5i6j7k8l"
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "token": "9c0d1e2f3g4h5i6j7k8l",
+    "type":"admin"
   }
 ]
