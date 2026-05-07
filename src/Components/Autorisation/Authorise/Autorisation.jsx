@@ -11,12 +11,11 @@ export const Autorisation = () => {
   const [authMode, setAuthMode] = useState(TYPE_MODAL.SING_UP);*/
 
   const { user, setUser, modalOpen, setModalOpen, authMode, logOut } = useStoreContext()
-  
-  
+  console.log(user)
   return (
 
     <div>
-      {!user ? <button onClick={() => setModalOpen(true)}>{authMode.text}</button> : <div className={styles.userInfo}><h4>{user.data.email}</h4> <button onClick={logOut}>Log out</button></div>}
+      {!user ? <button onClick={() => setModalOpen(true)}>{authMode.text}</button> : <div className={styles.userInfo}><h4>{user.email}</h4> <button onClick={logOut}>Log out</button></div>}
       {modalOpen && <Modal />}
     </div>
 

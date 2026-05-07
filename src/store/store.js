@@ -6,6 +6,7 @@ import { TYPE_MODAL } from "../Components/Forms/typeModeHelper";
 import { autorisation } from '../../back/api'
 import { removeProduct } from "../../back/apiProducts";
 import { editProduct } from "../../back/apiProducts";
+import { onRegistartionApi,onLoginApi } from "../firebase/auth";
 
 
 export const StoreContext = createContext({
@@ -32,35 +33,40 @@ export const useStore = () => {
   const [loading, setLoading] = useState(false);
   const [editCurrentProduct, setEditCurrentProduct] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null)
-  const isAdmin = user?.data.type === 'admin' ? true : false;
+  const isAdmin = user?.data?.type === 'admin' ? true : false;
 
 
 
   const editProductData = async (product) => {
     const res = await editProduct(product);
-    console.log(res)
+    const id = product.id;
     if (res.ok) {
       const copy = [...products]
+      const basketCopy = {...basket};
       const index = copy.findIndex((el) => el.id == res.data.id);
+      
       copy[index] = res.data;
-      console.log(res.data.id)
+      basketCopy[id].product = product
 
       setProducts(copy)
+      setBasket(basketCopy)
       setEditCurrentProduct(false)
     }
 
   }
-  const authorize = async (token) => {
-    const user = await autorisation(token);
-    if (user.ok) setUser(user);
+  const authorize = async () => {
+    
+    // const user = await autorisation(token);
+    // if (user.ok) setUser(user);
   }
 
   const addToBasket = (product) => {
     const copy = { ...basket }
-    if (copy[product.name]) {
-      copy[product.name].count++;
+    const id = product.id
+    if (copy[id]) {
+      copy[id].count++;
     } else {
-      copy[product.name] = { product: product, count: 1 }
+      copy[id] = { product: product, count: 1 }
     }
     //! error sheme
     setBasket(copy)
@@ -68,8 +74,9 @@ export const useStore = () => {
 
   const deleteFromBasket = (product) => {
     const copy = { ...basket }
-    copy[product.name].count--
-    if (copy[product.name].count === 0) delete copy[product.name];
+    const id = product.id
+    copy[id].count--
+    if (copy[id].count === 0) delete copy[id];
 
     setBasket(copy)
   }
@@ -82,7 +89,7 @@ export const useStore = () => {
       }
     }
     getProducts();
-    authorize(localStorage.getItem('token'))
+    authorize()
   }, [])
 
   useEffect(() => {
@@ -108,13 +115,13 @@ export const useStore = () => {
   }
 
   const onLogin = async (email, password) => {
-    const userData = await logIn(email, password);
+    const userData = await onLoginApi(email, password);
     if (userData.ok) {
-      setUser(userData);
-      localStorage.setItem('token', userData.data.token);
+      setUser(userData.data);
+      //localStorage.setItem('token', userData.data.token);
 
     }
-    return { ok: userData.ok, text: userData?.text || '' }
+    return { ok: userData.ok, message:userData.message }
 
   }
 
@@ -125,13 +132,14 @@ export const useStore = () => {
 
   const onRegistration = async (email, password) => {
 
-    const userData = await registration(email, password);
+    const userData = await onRegistartionApi(email, password);
 
     if (userData.ok) {
-      setUser(userData)
-      localStorage.setItem('token', userData.data.token)
+      setUser(userData.data)
+      // localStorage.setItem('token', userData.data.token)
+      //показать уведомление
     }
-    return { ok: userData.ok, text: userData?.text || '' }
+    return { ok: userData.ok, message:userData.message }
   }
 
   const openLoading = () => {

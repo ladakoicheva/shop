@@ -7,7 +7,7 @@ export default function BasketPage() {
  
   return (
     <ul>{
-      showBasket.map((el) => <li key={el[1].product.id}>name: {el[0]} count: {el[1].count}</li>)
+      showBasket.map((el) => <li key={el[1].product.id}>name: {el[1].product.name} count: {el[1].count}</li>)
     }</ul>
   )
 }
