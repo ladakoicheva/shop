@@ -28,7 +28,7 @@ export default function SignUpForm() {
   const userSignUp = async (email, password) => {
     const userData = await onRegistration(email, password);
     if (!userData.ok) {
-      setBackError(userData.text)
+      setBackError(userData.code)
     } else {
       setModalOpen(false)
     }

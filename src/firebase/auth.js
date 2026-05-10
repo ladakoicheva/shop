@@ -8,7 +8,7 @@ export const onRegistartionApi = async (email, password) => {
       email,
       password
     );
-    return {ok : true, data : data.user}
+    return { ok: true, data: data.user }
   } catch (error) {
     console.log(error)
     return { ok: false, message: error.message, code: error.code }
@@ -31,10 +31,5 @@ export const onLoginApi = async (email, password) => {
   }
 }
 
-const autorisationAPI = () => onAuthStateChanged(APP_AUTH, (user) => {
-  if (user) {
-    console.log("User is authorized:", user.email);
-  } else {
-    console.log("No authorized user");
-  }
-});
+
+

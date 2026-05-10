@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAllProduct } from "../../back/apiProducts";
 import { createProduct } from "../../back/apiProducts";
-import { logIn, registration } from "../../back/api";
 import { TYPE_MODAL } from "../Components/Forms/typeModeHelper";
-import { autorisation } from '../../back/api'
 import { removeProduct } from "../../back/apiProducts";
 import { editProduct } from "../../back/apiProducts";
-import { onRegistartionApi,onLoginApi } from "../firebase/auth";
+import { onRegistartionApi, onLoginApi } from "../firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { APP_AUTH } from "../firebase";
+
 
 
 export const StoreContext = createContext({
@@ -37,6 +38,8 @@ export const useStore = () => {
 
 
 
+
+
   const editProductData = async (product) => {
     const res = await editProduct(product);
     const id = product.id;
@@ -53,11 +56,6 @@ export const useStore = () => {
       setEditCurrentProduct(false)
     }
 
-  }
-  const authorize = async () => {
-    
-    // const user = await autorisation(token);
-    // if (user.ok) setUser(user);
   }
 
   const addToBasket = (product) => {
@@ -84,6 +82,7 @@ export const useStore = () => {
   }
 
   useEffect(() => {
+
     const getProducts = async () => {
       const productData = await getAllProduct();
       if (productData.ok) {
@@ -91,7 +90,21 @@ export const useStore = () => {
       }
     }
     getProducts();
-    //authorize()
+   
+
+    const unsubscribe = onAuthStateChanged(APP_AUTH, (user) => {
+      if (user) {
+          setUser(user)
+      } else {
+          setUser(null)
+        }
+    })
+
+    return () => {
+      unsubscribe();
+    }
+
+
   }, [])
 
   useEffect(() => {
@@ -120,16 +133,20 @@ export const useStore = () => {
     const userData = await onLoginApi(email, password);
     if (userData.ok) {
       setUser(userData.data);
-      //localStorage.setItem('token', userData.data.token);
-
     }
-    return { ok: userData.ok, message:userData.message }
+    return { ok: userData.ok, message:userData.message ,code:userData.code}
 
   }
 
-  const logOut = () => {
-    localStorage.removeItem('token');
-    setUser(null);
+  const logOut = async () => {
+    try {
+      const res = await signOut(APP_AUTH)
+      if (res) console.log('sign out successfull');
+    } catch (err) {
+      console.log(err);
+    }
+   
+   
   }
 
   const onRegistration = async (email, password) => {
@@ -138,10 +155,10 @@ export const useStore = () => {
 
     if (userData.ok) {
       setUser(userData.data)
-      // localStorage.setItem('token', userData.data.token)
+
       //показать уведомление
     }
-    return { ok: userData.ok, message:userData.message }
+    return { ok: userData.ok, message: userData.message, code: userData.code }
   }
 
   const openLoading = () => {
