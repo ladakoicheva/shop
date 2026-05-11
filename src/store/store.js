@@ -92,7 +92,7 @@ export const useStore = () => {
     getProducts();
    
 
-    const unsubscribe = onAuthStateChanged(APP_AUTH, (user) => {
+   onAuthStateChanged(APP_AUTH, (user) => {
       if (user) {
           setUser(user)
       } else {
@@ -100,9 +100,7 @@ export const useStore = () => {
         }
     })
 
-    return () => {
-      unsubscribe();
-    }
+ 
 
 
   }, [])
