@@ -19,6 +19,7 @@ export default function Header() {
         <div className={styles.mainNav}>
            {isAdmin && <Link to="/add">Add product</Link>}
           <Link to="/">Products</Link>
+          <Link to ='setting'>Setting</Link>
         </div>
 
     

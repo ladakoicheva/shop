@@ -7,7 +7,7 @@ import { editProduct } from "../../back/apiProducts";
 import { onRegistartionApi, onLoginApi } from "../firebase/auth";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { APP_AUTH } from "../firebase";
-
+import { getSettings } from '../firebase/db/settings';
 
 
 export const StoreContext = createContext({
@@ -45,9 +45,9 @@ export const useStore = () => {
     const id = product.id;
     if (res.ok) {
       const copy = [...products]
-      const basketCopy = {...basket};
+      const basketCopy = { ...basket };
       const index = copy.findIndex((el) => el.id == res.data.id);
-      
+
       copy[index] = res.data;
       basketCopy[id].product = product
 
@@ -59,7 +59,7 @@ export const useStore = () => {
   }
 
   const addToBasket = (product) => {
-  
+
     const copy = { ...basket }
     const id = product.id
     if (copy[id]) {
@@ -75,7 +75,7 @@ export const useStore = () => {
   const deleteFromBasket = (product) => {
     const copy = { ...basket }
     const id = product.id
-    copy[id].count --
+    copy[id].count--
     if (copy[id].count === 0) delete copy[id];
 
     setBasket(copy)
@@ -90,24 +90,21 @@ export const useStore = () => {
       }
     }
     getProducts();
-   
 
-   onAuthStateChanged(APP_AUTH, (user) => {
+
+    onAuthStateChanged(APP_AUTH, (user) => {
       if (user) {
-          setUser(user)
+        setUser(user)
       } else {
-          setUser(null)
-        }
+        setUser(null)
+      }
     })
-
- 
-
-
   }, [])
 
   useEffect(() => {
     localStorage.setItem('basket', JSON.stringify(basket))
   }, [basket])
+
 
   const addNewProduct = async (product) => {
     const response = await createProduct(product);
@@ -132,7 +129,7 @@ export const useStore = () => {
     if (userData.ok) {
       setUser(userData.data);
     }
-    return { ok: userData.ok, message:userData.message ,code:userData.code}
+    return { ok: userData.ok, message: userData.message, code: userData.code }
 
   }
 
@@ -143,8 +140,8 @@ export const useStore = () => {
     } catch (err) {
       console.log(err);
     }
-   
-   
+
+
   }
 
   const onRegistration = async (email, password) => {

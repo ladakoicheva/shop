@@ -8,6 +8,7 @@ import { StoreContext, useStore } from './store/store';
 import BasketPage from './Pages/BasketPage/BasketPage.jsx';
 import Loading from './Components/Loading/Loading.jsx'
 import ProductsForm from './Components/Forms/ProductsForm/ProductsForm.jsx';
+import Setting from './Components/Setting.jsx';
 
 function App() {
   // Сделать голосовые сообщение, распознавание голоса и голосовой ввод.
@@ -25,7 +26,7 @@ function App() {
           <Route path='/' element={<Products />} />
           <Route path='product/:id' element={<СurrentProductPage />} />
           <Route path='basket' element={<BasketPage />} />
-
+          <Route path='setting' element={<Setting/>} />
         </Routes>
       </StoreContext.Provider>
     </BrowserRouter>
