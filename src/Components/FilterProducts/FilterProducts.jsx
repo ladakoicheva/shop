@@ -31,22 +31,25 @@ export default function FilterProducts({ filterProducts }) {
 
     <div className={styles.filterProducts} >
 
+
       <div>
+        <input onChange={change} value={searchValue} type="search" placeholder=" search by name..." />
         <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} name="category" >
           <option value="All" >All</option>
           {options}
         </select>
-
-        <select value={price} onChange={(e) => setPrice(e.target.value)}>
+      
+        <select className={styles.selectBgRight} value={price} onChange={(e) => setPrice(e.target.value)}>
           <option value="normal" hidden>normal</option>
           <option value="min">Min price</option>
           <option value="max">Max price</option>
         </select>
+        
       </div>
-      <div>
-     
-        <input onChange={change} value={searchValue} type="search" placeholder= " search by name..." />
-      </div>
+
+
+
+
     </div>
   )
 }

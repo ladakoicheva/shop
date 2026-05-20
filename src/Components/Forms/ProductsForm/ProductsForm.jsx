@@ -50,7 +50,7 @@ export default function ProductsForm() {
     if (response.ok) {
       store.addNewProduct(response.data)
     } else {
-      
+      console.log('error')
     }
     store.closeLoading()
 
@@ -98,12 +98,13 @@ export default function ProductsForm() {
     <>
 
       <form className={styles.productForm} onSubmit={formik.handleSubmit}>
-        {store.editCurrentProduct && <span onClick={() => store.setEditCurrentProduct(false)} className={styles.close}>×</span>}
+        {store.editCurrentProduct && <span onClick={() =>
+          store.setEditCurrentProduct(false)} className={styles.close}>×</span>}
         <h1>{store.editCurrentProduct ? 'Edit Product' : 'Add Product'} </h1>
         <hr style={{ width: '100%' }} />
-        {!img?<input onChange={handleFileChange} type="file" id='img' />:    <div>
-          <img style={{width:'50px'}} src={img?.src
-          } alt="" /> <span>×</span>
+        {!img?<input onChange={handleFileChange} type="file" id='img' />:    <div className={styles.imgPreview}>
+          <img  src={img?.src
+          } alt="" /> <span onClick={()=>setImg(null)}>×</span>
         </div>}
     
         

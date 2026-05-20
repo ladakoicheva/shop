@@ -1,6 +1,5 @@
 .modal {
-
-  background-color: rgb(252, 242, 242);
+  background-color: white;
   width: clamp(300px, 30%, 600px);
   aspect-ratio: 1/1;
   border-radius: 10px;
@@ -12,15 +11,6 @@
   border: 2px solid #e5e4e7;;
 }
 
-.modal form {
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-
-}
 
 .modalHeader {
 

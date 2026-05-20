@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { minSort,maxSort } from "../../utils/sort";
+import { minSort, maxSort } from "../../utils/sort";
 import ProductCard from "../../Components/ProductCard/ProductCard"
 import styles from './Products.module.css'
 import FilterProducts from "../../Components/FilterProducts/FilterProducts";
@@ -10,7 +10,7 @@ import { useStoreContext } from "../../store/store";
 
 export default function Products() {
   const store = useStoreContext();
-  const products = store.products 
+  const products = store.products
   const [showProducts, setShowProducts] = useState(products)
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Products() {
       return checkText && checkCategory
     })
     if (price !== 'normal') {
-      const callback = price === 'min'? minSort : maxSort
+      const callback = price === 'min' ? minSort : maxSort
       filtered.sort(callback)
     }
     setShowProducts(filtered);
@@ -51,8 +51,9 @@ export default function Products() {
 
 
   return (
-    
- <div>
+
+    <div>
+
       {/*<h3>Select category</h3>
       <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} name="category" >
         <option value="All" >All</option>
@@ -65,20 +66,23 @@ export default function Products() {
         <option value="max">Max price</option>
       </select>
       <input onChange={change} value={searchValue }type="text" placeholder="search by name..." />*/}
+    
+        <FilterProducts className={styles.filterProducts} options={options} filterProducts={filterProducts} />
      
-      <FilterProducts options={options} filterProducts={filterProducts} />
-      {products.length >= 1 ?<ul className={styles.grid_template_columns}>
+
+
+      {products.length >= 1 ? <ul className={styles.grid_template_columns}>
         {showProducts && showProducts.map((el) =>
           <li key={el.id}>
             <ProductCard key={el.id} product={el} />
           </li>
         )}
-      </ul>:<h1>No products</h1>
+      </ul> : <h1>No products</h1>
       }
-   </div >
+    </div >
 
   )
-  
+
 }
 
 

@@ -17,8 +17,8 @@ export default function Header() {
       <nav className={styles.navContainer}>
 
         <div className={styles.mainNav}>
-          <Link to="/add">Add product</Link>
           <Link to="/">Products</Link>
+          <Link to="/add">Add product</Link>
           <Link to='setting'>Setting</Link>
         </div>
 

@@ -1,40 +1,48 @@
 .filterProducts {
-  width: 100vw;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  position: sticky;
-  
-  z-index: 100;
-  top: 90px
+  z-index: 98;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-.filterProducts select {
-  height: 100%;
-  color:#e5e4e7;
-
-}
 
 .filterProducts input {
- 
-  border: 1px solid rgb(40, 40, 40);
-  height: 100%;
-  color: rgb(40, 40, 40);
-  background: url('/search-286-64.png');
-   background-color: rgb(245, 245, 245);
-  background-repeat: no-repeat;
-  background-position: left;
-  background-size: 30px;
-  padding-left: 30px;
-  padding-top:5px;
-  padding-bottom: 5px;
+  width: 50%;
+  padding: 15px 20px;
+  background: url('/public/search-286-64.png') no-repeat left;
+  background-size: 20px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  outline: none;
+}
+
+.selectBgRight {
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.filterProducts input,
+select {
+
+  background-color: white;
+  border: none;
+
 
 }
 
 
-.filterProducts input::placeholder {
-  color: rgb(40, 40, 40);
+.filterProducts select {
+  width: 25%;
+  padding: 14px 20px;
+  outline: none;
 }
 
+.filterProducts select:focus {
+  outline: none;
+}
+
+.filterProducts input:focus {
+  outline: none;
+}

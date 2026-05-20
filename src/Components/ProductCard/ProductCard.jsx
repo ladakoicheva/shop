@@ -9,28 +9,31 @@ import { useStoreContext } from '../../store/store'
 export default function ProductCard({ product }) {
 
   const { addToBasket, deleteFromBasket, basket, isAdmin, editCurrentProduct,
-    setEditCurrentProduct, setProductToEdit,deleteProduct } = useStoreContext();
+    setEditCurrentProduct, setProductToEdit, deleteProduct } = useStoreContext();
 
-  //  const isInBasket = useMemo(() => {
 
-  //    const isInBasket = basket.hasOwnProperty(product.name)
-  //     return isInBasket
-  //  }, [basket])
   const isInBasket = basket[product.id]
-  
+
 
   return (
     <>
+
       <article className={style.productCard} >
         <Link to={`product/${product.id}`}>
-          <h3>{product.name}</h3>
-          <img src={product.img || '/No-Image.svg.png'} alt="" />
-        </Link>
+          <div className={style.img}>
+            <img src={product.img || '/No-Image.svg.png'} alt="" />
+            <span style={{ color: `${product.inStock ? 'green' : 'red'}` }}>{product.inStock ? '◉ in Stock' : '◉ out of Stock'}</span>
+          </div>
+          <div className={style.product}> <h3>{product.name}</h3> <div className={style.rating}>  <img src="/star.png" alt="" /> <h3>{product.rating}</h3></div></div>
 
+
+        </Link>
+        
         <section className={style.info}>
+          <div className={style.category}>category:{product.category}</div>
           <div className={style.buyInfo}>
             <h2>{product.currency == 'UAH' ? getUANtoUSD(product.price) : product.price} USD</h2>
-            <div className={style.basketBtns}>
+            <div className={style.basketBtns} >
               <button onClick={() => addToBasket(product)} >+</button>
               {basket[product.id]?.count}
               {isInBasket && <button onClick={() => deleteFromBasket(product)}>-</button>}
@@ -38,20 +41,17 @@ export default function ProductCard({ product }) {
 
 
           </div>
-          <section className={style.additionalInfo}>
-            <div style={{ color: `${product.inStock ? 'green' : 'red'}` }}>{product.inStock ? '◉ in Stock' : '◉ out of Stock'}</div>
-            <div>category:{product.category}</div>
-          </section>
-          
+
         </section>
-        <div className={style.btns}><button onClick={() => deleteProduct(product.id)}>delete</button> <button onClick={() => {
+        <span className={style.deleteBtn} onClick={() => deleteProduct(product.id)}>×</span>
+        <div className={style.editBtn}><img src="/edit.png"  onClick={() => {
           setEditCurrentProduct(true)
           setProductToEdit(product)
-        } 
-     }>Edit</button></div>
-
+        }
+        } />
+        </div>
       </article>
-     
+
     </>
   )
 }

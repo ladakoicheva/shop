@@ -19,7 +19,7 @@ function App() {
         <Header />
         {store.loading && <Loading />}
          {store.editCurrentProduct && <ProductsForm  />}
-
+        <div className='filterBg'></div>
         <Routes>
           <Route path='/add' element={<AddProducts />} />
 
