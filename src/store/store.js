@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAllProduct } from "../../back/apiProducts";
+import { getAllProducts } from "../firebase/db/products";
 import { createProduct } from "../../back/apiProducts";
 import { TYPE_MODAL } from "../Components/Forms/typeModeHelper";
-import { removeProduct } from "../../back/apiProducts";
 import { editProduct } from "../../back/apiProducts";
 import { onRegistartionApi, onLoginApi } from "../firebase/auth";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { APP_AUTH } from "../firebase";
 import { getSettings } from '../firebase/db/settings';
+import { removeProduct } from "../firebase/db/products";
 
 
 export const StoreContext = createContext({
@@ -37,7 +37,9 @@ export const useStore = () => {
   const isAdmin = user?.data?.type === 'admin' ? true : false;
 
 
-
+  const addNewProduct = (product) => {
+    setProducts([...products, product])
+  }
 
 
   const editProductData = async (product) => {
@@ -84,10 +86,19 @@ export const useStore = () => {
   useEffect(() => {
 
     const getProducts = async () => {
-      const productData = await getAllProduct();
-      if (productData.ok) {
-        setProducts(productData.data);
+      openLoading();
+      try {
+        const productData = await getAllProducts()
+        if (productData.ok) {
+          setProducts(productData.products);
+          closeLoading()
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        closeLoading()
       }
+
     }
     getProducts();
 
@@ -106,14 +117,7 @@ export const useStore = () => {
   }, [basket])
 
 
-  const addNewProduct = async (product) => {
-    const response = await createProduct(product);
-    if (response.ok) {
-      setProducts([...products, response.data])
 
-    }
-    return response.ok
-  }
 
   const deleteProduct = async (id) => {
     const res = await removeProduct(id);
@@ -167,6 +171,7 @@ export const useStore = () => {
     user,
     products,
     addNewProduct,
+
     onRegistration,
     onLogin,
     setUser,
@@ -179,7 +184,6 @@ export const useStore = () => {
     addToBasket,
     deleteFromBasket,
     basket,
-    deleteProduct,
     loading,
     openLoading,
     closeLoading,
@@ -187,7 +191,8 @@ export const useStore = () => {
     setEditCurrentProduct,
     editProductData,
     productToEdit,
-    setProductToEdit
+    setProductToEdit,
+    deleteProduct,
   }
 }
 

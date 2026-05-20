@@ -4,20 +4,21 @@ import IOSSwitch from '../../Switch';
 import { schema } from '../schemas/productsValidationSchema';
 import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../../../store/store';
-import { useEffect } from 'react';
-
+import { addProduct } from '../../../firebase/db/products';
+import { useState } from 'react';
 
 
 
 export default function ProductsForm() {
-
+  const [img, setImg] = useState(null);
  
+
   const store = useStoreContext();
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      name: store.editCurrentProduct ? store.productToEdit.name:'',
+      name: store.editCurrentProduct ? store.productToEdit.name : '',
       category: store.editCurrentProduct ? store.productToEdit.category : '',
       price: store.editCurrentProduct ? store.productToEdit.price : '',
       currency: store.editCurrentProduct ? store.productToEdit.currency : 'UAH',
@@ -27,56 +28,85 @@ export default function ProductsForm() {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      store.editCurrentProduct ? store.editProductData({ ...values, id: store.productToEdit.id }):create(values)
+      store.editCurrentProduct ? store.editProductData({ ...values, id: store.productToEdit.id }) : create(values)
     },
 
 
   });
+
   const create = async (product) => {
+    // const id = Date.now().toString()
     store.openLoading()
-    const isInProducts = store.products.some((el) => el.name === product.name);
+    /*const isInProducts = store.products.some((el) => el.name === product.name);
     if (isInProducts) {
       //сделать увед пользователю
       console.log('product exists');
       store.closeLoading()
       return
+    }*/
+    // try {
+    const response = await addProduct(product, img.file, store.user.uid)
+    
+    if (response.ok) {
+      store.addNewProduct(response.data)
+    } else {
+      
     }
+    store.closeLoading()
 
-    const isResponse = await store.addNewProduct(product)
-
-    if (isResponse) {
-      setTimeout(store.closeLoading, 3000)
-
-      formik.resetForm();
-      navigate('/')
-
-    }
-
-
+    //   const isResponse = await addProduct(id, { ...product, id: id })
+    //   if (isResponse.ok) {
+    //     store.setProducts([...store.products,isResponse.data])
+    //   }
+    // } catch (e) {
+    //   console.log(e)
+    // } finally {
+    //   navigate('/')
+    // }
   }
 
-  const handleFileChange = (e) => {
+
+  const handleFileChange =  (e) => {
+    
+    //const imgUrl = await addImg(e)
+    // if (imgUrl.ok) {
+    //   formik.setFieldValue('img',imgUrl.url)
+    // }
+
     const file = e.target.files[0];
-    const reader = new FileReader();
-    console.log(e)
-    if (file) {
-      reader.onload = (e) => {
-        const link = e.target.result;
-        formik.setFieldValue('img', link)
-      }
-      reader.readAsDataURL(file)
-    }
+  
 
 
+      if (!file) return;
+
+      const reader = new FileReader();
+
+
+      reader.onload = (event) => {
+        const src = event.target.result;
+        setImg({ file: file, src: src });
+      };
+
+      reader.readAsDataURL(file);
+   
   }
+
+ 
+
+
   return (
     <>
 
       <form className={styles.productForm} onSubmit={formik.handleSubmit}>
-        {store.editCurrentProduct && <span onClick={()=>store.setEditCurrentProduct(false) } className={styles.close}>×</span>}
-        <h1>{store.editCurrentProduct?'Edit Product' :'Add Product'} </h1>
+        {store.editCurrentProduct && <span onClick={() => store.setEditCurrentProduct(false)} className={styles.close}>×</span>}
+        <h1>{store.editCurrentProduct ? 'Edit Product' : 'Add Product'} </h1>
         <hr style={{ width: '100%' }} />
-        <input onChange={handleFileChange} type="file" id='img' />
+        {!img?<input onChange={handleFileChange} type="file" id='img' />:    <div>
+          <img style={{width:'50px'}} src={img?.src
+          } alt="" /> <span>×</span>
+        </div>}
+    
+        
         <label htmlFor="name">Product name</label>
         <input onChange={formik.handleChange} value={formik.values.name} id='name' type="text" placeholder='product`s name' />
 

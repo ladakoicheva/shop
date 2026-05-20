@@ -3,13 +3,13 @@ import style from './ProductCard.module.css'
 import { getUANtoUSD } from '../../utils/convector'
 import { Link } from 'react-router-dom'
 import { useStoreContext } from '../../store/store'
-import ProductsForm from '../Forms/ProductsForm/ProductsForm'
+
 
 
 export default function ProductCard({ product }) {
 
-  const { addToBasket, deleteFromBasket, basket, isAdmin, deleteProduct, editCurrentProduct,
-    setEditCurrentProduct, setProductToEdit } = useStoreContext();
+  const { addToBasket, deleteFromBasket, basket, isAdmin, editCurrentProduct,
+    setEditCurrentProduct, setProductToEdit,deleteProduct } = useStoreContext();
 
   //  const isInBasket = useMemo(() => {
 
@@ -44,11 +44,11 @@ export default function ProductCard({ product }) {
           </section>
           
         </section>
-        {isAdmin && <div className={style.btns}><button onClick={() => deleteProduct(product.id)}>delete</button> <button onClick={() => {
+        <div className={style.btns}><button onClick={() => deleteProduct(product.id)}>delete</button> <button onClick={() => {
           setEditCurrentProduct(true)
           setProductToEdit(product)
         } 
-     }>Edit</button></div>}
+     }>Edit</button></div>
 
       </article>
      

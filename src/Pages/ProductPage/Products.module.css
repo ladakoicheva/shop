@@ -13,7 +13,7 @@
 @media (max-width:769px) {
   .grid_template_columns {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: minmax(400px, auto);
+    grid-auto-rows: minmax(400px, auto);
   }
 
 }

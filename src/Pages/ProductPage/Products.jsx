@@ -14,6 +14,7 @@ export default function Products() {
   const [showProducts, setShowProducts] = useState(products)
 
   useEffect(() => {
+    console.log(products)
     setShowProducts(products)
   }, [products])
 
@@ -66,14 +67,14 @@ export default function Products() {
       <input onChange={change} value={searchValue }type="text" placeholder="search by name..." />*/}
      
       <FilterProducts options={options} filterProducts={filterProducts} />
-      <ul className={styles.grid_template_columns}>
+      {products.length >= 1 ?<ul className={styles.grid_template_columns}>
         {showProducts && showProducts.map((el) =>
           <li key={el.id}>
             <ProductCard key={el.id} product={el} />
           </li>
         )}
-      </ul>
-      
+      </ul>:<h1>No products</h1>
+      }
    </div >
 
   )

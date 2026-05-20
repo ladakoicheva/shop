@@ -21,7 +21,7 @@ function App() {
          {store.editCurrentProduct && <ProductsForm  />}
 
         <Routes>
-          {store.isAdmin && <Route path='/add' element={<AddProducts />} />}
+          <Route path='/add' element={<AddProducts />} />
 
           <Route path='/' element={<Products />} />
           <Route path='product/:id' element={<СurrentProductPage />} />
